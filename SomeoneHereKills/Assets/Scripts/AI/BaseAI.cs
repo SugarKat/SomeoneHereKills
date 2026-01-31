@@ -28,6 +28,8 @@ public class BaseAI : MonoBehaviour
 
     bool isAgentAlive = true;
 
+    public bool IsAgentAlive { get { return isAgentAlive; } }
+
     public float timeBetweenHangouts = 10f;
     public float hangoutStopDistance = 1.2f;
 
@@ -205,5 +207,6 @@ public class BaseAI : MonoBehaviour
     public void KillAgent()
     {
         isAgentAlive = false;
+        agent.ResetPath();
     }
 }
