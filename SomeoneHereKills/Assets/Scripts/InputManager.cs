@@ -18,11 +18,13 @@ public class InputManager : MonoBehaviour
     {
         inputActions.Gameplay.Enable();
         inputActions.Gameplay.Interaction.performed += OnClickPerformed;
+        inputActions.Gameplay.PauseAction.performed += OnPauseActuation;
     }
 
     private void OnDisable()
     {
         inputActions.Gameplay.Interaction.performed -= OnClickPerformed;
+        inputActions.Gameplay.PauseAction.performed -= OnPauseActuation;
         inputActions.Gameplay.Disable();
     }
 
@@ -39,5 +41,10 @@ public class InputManager : MonoBehaviour
                 GameManager.instance.KillEvent(agent);
             }
         }
+    }
+
+    void OnPauseActuation(InputAction.CallbackContext ctx)
+    {
+        GameManager.instance.TogglePause();
     }
 }

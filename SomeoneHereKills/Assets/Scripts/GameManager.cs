@@ -7,9 +7,13 @@ public class GameManager : MonoBehaviour
 
     public GameRules gameRules;
 
+    public GameObject pausePanel;
+
     bool targetKilled = false;
     bool isGameStarted = false;
     float timer;
+
+    public bool IsPaused { get; private set; }
 
     private void Awake()
     {
@@ -83,6 +87,32 @@ public class GameManager : MonoBehaviour
     {
         GameEndManager.instance.ActivatePanel(true);
         Debug.Log("We got the killer, target is saved.");
+    }
+
+    public void TogglePause()
+    {
+        if (IsPaused)
+            ResumeGame();
+        else
+            PauseGame();
+    }
+
+    void PauseGame()
+    {
+        pausePanel.SetActive(true);
+        IsPaused = true;
+        Time.timeScale = 0f;
+        Debug.Log("Game Paused");
+        // Show pause UI here
+    }
+
+    void ResumeGame()
+    {
+        pausePanel.SetActive(false);
+        IsPaused = false;
+        Time.timeScale = 1f;
+        Debug.Log("Game Resumed");
+        // Hide pause UI here
     }
 
 }
