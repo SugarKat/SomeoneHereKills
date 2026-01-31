@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public GameRules gameRules;
 
     bool targetKilled = false;
+    bool isGameStarted = false;
+    float timer;
 
     private void Awake()
     {
@@ -17,6 +19,23 @@ public class GameManager : MonoBehaviour
         {
             gameRules = new GameRules();
         }
+
+        timer = gameRules.GameTime;
+    }
+
+    private void Update()
+    {
+        if (!isGameStarted)
+            return;
+
+        if(timer <= 0)
+        {
+            Debug.Log("game has ended");
+            GameLost();
+            return;
+        }
+
+        timer -= Time.deltaTime;
     }
 
     public void KillEvent(BaseAI victim)
@@ -30,8 +49,9 @@ public class GameManager : MonoBehaviour
         switch (victim.Role) 
         {
             case BaseAI.AgentRole.Bystander:
-                Debug.Log("You eliminated an innocent!");                
+                Debug.Log("You eliminated an innocent!");
                 // It's a bad thing we killed a bystander, we need to decide how to handle this situation
+                GameLost(true);
                 break;
 
             case BaseAI.AgentRole.Target:
@@ -46,8 +66,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void GameLost()
+    void GameLost(bool killedInnocent = false)
     {
+        if(killedInnocent)
+        {
+            GameEndManager.instance.ActivatePanel(false, false);
+
+            return;
+        }
         targetKilled = true;
         GameEndManager.instance.ActivatePanel(false);
         Debug.Log("The killer got the target, mission failed.");
