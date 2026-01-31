@@ -21,21 +21,21 @@ public class GameManager : MonoBehaviour
 
     public void KillEvent(BaseAI victim)
     {
-        if (targetKilled)
-        {
+        if (victim == null || !victim.IsAgentAlive)
             return;
-        }
+
+        victim.KillAgent();
         // Will need to handle events accordingly who got killed
 
         switch (victim.Role) 
         {
             case BaseAI.AgentRole.Bystander:
+                Debug.Log("You eliminated an innocent!");                
                 // It's a bad thing we killed a bystander, we need to decide how to handle this situation
                 break;
 
             case BaseAI.AgentRole.Target:
                 // The killer got his target, so that means we lost
-                victim.KillAgent();
                 GameLost();
                 break;
             
@@ -58,4 +58,5 @@ public class GameManager : MonoBehaviour
         GameEndManager.instance.ActivatePanel(true);
         Debug.Log("We got the killer, target is saved.");
     }
+
 }
