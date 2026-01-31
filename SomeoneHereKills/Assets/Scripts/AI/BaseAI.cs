@@ -6,7 +6,8 @@ public class BaseAI : MonoBehaviour
     {
         Wandering,
         Chasing,
-        Moving
+        Moving,
+        HangingOut
     }
 
     AgentState state;
@@ -14,6 +15,12 @@ public class BaseAI : MonoBehaviour
     NavMeshAgent agent;
     float directionTimer;
     Vector3 currentWanderDir;
+
+    Transform hangoutSpot;
+    float hangoutTimer;
+
+    public float timeBetweenHangouts = 10f;
+    public float hangoutStopDistance = 1.2f;
 
     public float directionUpdateInterval = 3f;
     public float wanderTurnLimit = 125f; // degrees
@@ -39,6 +46,8 @@ public class BaseAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         currentWanderDir = RandomDirectionPos();
+        
+        hangoutTimer = timeBetweenHangouts;
 
         if(isAKiller)
         {
@@ -83,12 +92,24 @@ public class BaseAI : MonoBehaviour
 
             case AgentState.Moving:
                 break;
+            
+            case AgentState.HangingOut:
+                HandleHangingOut();
+                break;
         }
     }
 
     void HandleWandering()
     {
         directionTimer += Time.deltaTime;
+        hangoutTimer -= Time.deltaTime;
+
+        // Occasionally decide to go hang out somewhere
+        if (!isAKiller && hangoutTimer <= 0 + Random.Range(-2, 2))
+        {
+            TryGetHangoutSpot();
+            return;
+        }
 
         if (directionTimer >= directionUpdateInterval)
         {
@@ -98,6 +119,39 @@ public class BaseAI : MonoBehaviour
 
         Vector3 destination = transform.position + currentWanderDir * wanderDistance;
         agent.destination = destination;
+    }
+
+    void HandleHangingOut()
+    {
+        if (hangoutSpot == null || hangoutTimer >= timeBetweenHangouts + Random.Range(-2, 2))
+        {
+            StateSwitch(AgentState.Wandering);
+            return;
+        }
+
+        float dist = Vector3.Distance(transform.position, hangoutSpot.position);
+
+        if (dist > hangoutStopDistance)
+        {
+            agent.destination = hangoutSpot.position;            
+        }
+        else
+        {
+            hangoutTimer += Time.deltaTime;
+            agent.ResetPath(); // Stay at the spot
+        }
+    }
+
+    void TryGetHangoutSpot()
+    {
+        if (LevelManager.instance == null) return;
+
+        Transform spot = LevelManager.instance.GetAnInterestPoint();
+        if (spot == null) return;
+
+        hangoutSpot = spot;
+        hangoutTimer = 0f;
+        StateSwitch(AgentState.HangingOut);
     }
 
     Vector3 GetLimitedTurnDirection(Vector3 currentDir, float maxAngle)
@@ -117,5 +171,13 @@ public class BaseAI : MonoBehaviour
     public void StateSwitch(AgentState _state)
     {
         state = _state;
+    }
+
+    public void SetHangoutSpot(Transform spot)
+    {
+        if (spot == null) return;
+
+        hangoutSpot = spot;
+        StateSwitch(AgentState.HangingOut);
     }
 }
