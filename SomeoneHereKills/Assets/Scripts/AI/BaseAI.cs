@@ -26,6 +26,8 @@ public class BaseAI : MonoBehaviour
     Transform hangoutSpot;
     float hangoutTimer;
 
+    bool isAgentAlive = true;
+
     public float timeBetweenHangouts = 10f;
     public float hangoutStopDistance = 1.2f;
 
@@ -76,6 +78,9 @@ public class BaseAI : MonoBehaviour
 
     private void Update()
     {
+        if (!isAgentAlive)
+            return;
+
         switch (state)
         {
             case AgentState.Wandering:
@@ -97,6 +102,7 @@ public class BaseAI : MonoBehaviour
                     else
                     {
                         agent.ResetPath();
+                        GameManager.instance.KillEvent(target.GetComponent<BaseAI>());
                     }
                 }
                 else
@@ -194,5 +200,10 @@ public class BaseAI : MonoBehaviour
 
         hangoutSpot = spot;
         StateSwitch(AgentState.HangingOut);
+    }
+
+    public void KillAgent()
+    {
+        isAgentAlive = false;
     }
 }
