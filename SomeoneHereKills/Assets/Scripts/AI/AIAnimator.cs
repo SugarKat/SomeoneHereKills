@@ -24,19 +24,33 @@ public class AIAnimator : MonoBehaviour
 
     void UpdateAnimFromAgent()
     {
-        if (agent == null) return;
+        if (agent == null || anim == null) return;
 
-        Vector3 v3 = agent.velocity;
-        Vector2 v = new Vector2(-v3.z, v3.y);
+        Vector3 v3 = agent.desiredVelocity;
+        Vector2 dir2D = new Vector2(-v3.z, v3.y);
 
         bool hasMoveIntent =
             agent.hasPath &&
             !agent.pathPending &&
             agent.remainingDistance > agent.stoppingDistance + 0.05f;
 
-        bool moving = hasMoveIntent && v.sqrMagnitude > 0.001f;
+        bool moving = hasMoveIntent && dir2D.sqrMagnitude > 0.001f;
 
-        Vector2 dir = moving ? v.normalized : Vector2.zero;
+        Vector2 dir = moving ? dir2D.normalized : Vector2.zero;
+
+        if (moving)
+        {
+            if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+            {
+                dir.x = Mathf.Sign(dir.x);
+                dir.y = 0f;
+            }
+            else
+            {
+                dir.y = Mathf.Sign(dir.y);
+                dir.x = 0f;
+            }
+        }
 
         anim.SetBool("isMoving", moving);
         anim.SetFloat("MoveX", dir.x);
@@ -47,6 +61,6 @@ public class AIAnimator : MonoBehaviour
             anim.SetFloat("LastMoveX", dir.x);
             anim.SetFloat("LastMoveY", dir.y);
         }
-
     }
+
 }
