@@ -10,6 +10,13 @@ public class BaseAI : MonoBehaviour
         HangingOut
     }
 
+    public enum AgentRole
+    {
+        Bystander,
+        Killer,
+        Target
+    }
+
     AgentState state;
     Transform target;
     NavMeshAgent agent;
@@ -28,6 +35,8 @@ public class BaseAI : MonoBehaviour
 
     public float attackRange = 2f;
 
+    public AgentRole Role { get; private set; }
+
     public bool isAKiller = false;
     public bool isATarget = false;
 
@@ -38,6 +47,7 @@ public class BaseAI : MonoBehaviour
     {
         if(isATarget)
         {
+            Role = AgentRole.Target;
             killerTarget = GetComponent<Transform>();
         }
     }
@@ -48,14 +58,19 @@ public class BaseAI : MonoBehaviour
         currentWanderDir = RandomDirectionPos();
         
         hangoutTimer = timeBetweenHangouts;
+        state = AgentState.Wandering;
 
-        if(isAKiller)
+        if (isAKiller)
         {
+            Role = AgentRole.Killer;
             state = AgentState.Chasing;
             target = killerTarget;
         }
-        else
-            state = AgentState.Wandering;
+        else if (!isATarget)
+        {
+            Role = AgentRole.Bystander;
+        }
+            
 
     }
 
