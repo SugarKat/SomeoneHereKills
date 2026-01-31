@@ -15,7 +15,7 @@ public class MaskBuilder : MonoBehaviour
 
     private void Start()
     {
-        config = MaskRandomizer.Generate();
+        config = MaskRandomizer.Instance.GenerateMask(transform.parent.gameObject);
         Build();
     }
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd328b3a759fc3840b49ea1aa4bbd177, type: 3}
   m_Name: MaskSettings
   m_EditorClassIdentifier: Assembly-CSharp::UniversalMaskSettings
-  maskScale: 0.05
+  maskScale: 0.15
   baseOffset: {x: 0, y: 0, z: 0}
   cheeksOffset: {x: 0, y: 0, z: -0.01}
   eyesOffset: {x: 0, y: 0, z: -0.02}
