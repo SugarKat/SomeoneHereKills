@@ -46,7 +46,7 @@ NavMeshAgent:
   m_Radius: 0.4
   m_Speed: 1
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 30
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -72,7 +72,7 @@ MonoBehaviour:
   hangoutStopDistance: 1.2
   directionUpdateInterval: 2
   wanderTurnLimit: 125
-  wanderDistance: 3
+  wanderDistance: 0.5
   attackRange: 2
   isAKiller: 0
   isATarget: 1
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3136984664551035865}
   - component: {fileID: 47246672007375494}
-  - component: {fileID: 6936645603752168166}
+  - component: {fileID: 5532493601895324998}
   m_Layer: 0
   m_Name: GPX
   m_TagString: Untagged
@@ -168,21 +168,15 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1183024399 &6936645603752168166
-LookAtConstraint:
+--- !u!114 &5532493601895324998
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3986919099285572352}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_Roll: 0
-  m_WorldUpObject: {fileID: 0}
-  m_UseUpObject: 1
-  m_Active: 1
-  m_IsLocked: 1
-  m_Sources: []
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463a2c69e59621f44b974897527fac85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FaceCamera

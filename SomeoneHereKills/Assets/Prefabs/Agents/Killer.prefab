@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4133983110454071467}
   - component: {fileID: 3800917346333034531}
-  - component: {fileID: 8611365985485861102}
+  - component: {fileID: 3643422399897596517}
   m_Layer: 0
   m_Name: GPX
   m_TagString: Untagged
@@ -92,24 +92,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1183024399 &8611365985485861102
-LookAtConstraint:
+--- !u!114 &3643422399897596517
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8090230732521849590}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_Roll: 0
-  m_WorldUpObject: {fileID: 0}
-  m_UseUpObject: 1
-  m_Active: 1
-  m_IsLocked: 1
-  m_Sources: []
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463a2c69e59621f44b974897527fac85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FaceCamera
 --- !u!1 &8740265983478523695
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +176,7 @@ MonoBehaviour:
   hangoutStopDistance: 1.2
   directionUpdateInterval: 2
   wanderTurnLimit: 125
-  wanderDistance: 3
+  wanderDistance: 0.5
   attackRange: 2
   isAKiller: 1
   isATarget: 0
