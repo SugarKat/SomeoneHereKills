@@ -144,6 +144,9 @@ MonoBehaviour:
   agent: {fileID: 3412107141006046214}
   anim: {fileID: 8771149223677308407}
   movingThreshold: 0.02
+  minFidgetDelay: 3
+  maxFidgetDelay: 7
+  fidgetChance: 0.25
 --- !u!1 &8740265983478523695
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684f165b11ddabd4ca1ef843ab5fb7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseAI
+  animator: {fileID: 6443537974499746626}
   timeBetweenHangouts: 10
   hangoutStopDistance: 1.2
   directionUpdateInterval: 2

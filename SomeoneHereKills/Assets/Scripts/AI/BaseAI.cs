@@ -28,6 +28,8 @@ public class BaseAI : MonoBehaviour
 
     bool isAgentAlive = true;
 
+    public AIAnimator animator;
+
     public bool IsAgentAlive { get { return isAgentAlive; } }
 
     public float timeBetweenHangouts = 10f;
@@ -74,8 +76,8 @@ public class BaseAI : MonoBehaviour
         {
             Role = AgentRole.Bystander;
         }
-            
 
+        agent.speed *= Random.Range(0.9f, 1.1f);
     }
 
     private void Update()
@@ -208,5 +210,7 @@ public class BaseAI : MonoBehaviour
     {
         isAgentAlive = false;
         agent.ResetPath();
+        agent.isStopped = true;
+        animator?.SetDead();
     }
 }

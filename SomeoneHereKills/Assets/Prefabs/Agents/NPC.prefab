@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684f165b11ddabd4ca1ef843ab5fb7b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BaseAI
+  animator: {fileID: 1551635518459053589}
   timeBetweenHangouts: 10
   hangoutStopDistance: 1.2
   directionUpdateInterval: 2
@@ -220,6 +221,9 @@ MonoBehaviour:
   agent: {fileID: 8164541147411929338}
   anim: {fileID: 4478947899107999161}
   movingThreshold: 0.02
+  minFidgetDelay: 3
+  maxFidgetDelay: 7
+  fidgetChance: 0.25
 --- !u!1001 &4453259522666356632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -238,11 +242,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5172244144794540510, guid: 265bb9db7c7bfad4285ddfe7cf1f6930, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.549
       objectReference: {fileID: 0}
     - target: {fileID: 5172244144794540510, guid: 265bb9db7c7bfad4285ddfe7cf1f6930, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.549
       objectReference: {fileID: 0}
     - target: {fileID: 5172244144794540510, guid: 265bb9db7c7bfad4285ddfe7cf1f6930, type: 3}
       propertyPath: m_LocalRotation.w
