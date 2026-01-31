@@ -7,6 +7,6 @@ public class MaskConfig
     public Eyes eyes;
 }
 public enum MaskBase { Gold, Silver, Diamond }
-public enum Cheeks { Color1, Color2, Color3, None }
-public enum Horns { Pointy, Wide, Split, None }
-public enum Eyes { Wide, Small, Lined }
+public enum Cheeks { Green, Mint, Purple, None }
+public enum Horns { Cake, Cat, Curvy, None }
+public enum Eyes { Cat, Circled, Scary }
