@@ -13,10 +13,18 @@ MonoBehaviour:
   m_Name: MaskLibrary
   m_EditorClassIdentifier: Assembly-CSharp::MaskPartLibrary
   bases:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 8fededbacdbbd3b4bb1c44aaf522d1c4, type: 3}
+  - {fileID: 21300000, guid: f5499c7001296d64da0954c6e4dcd41b, type: 3}
+  - {fileID: 21300000, guid: 25c34518905f26c4cb0df49e3f43e2e4, type: 3}
   cheeks:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: b0c9c4967ed00d447a11b21ba383b38a, type: 3}
+  - {fileID: 21300000, guid: 3738cc21d15f9e741afc74af63106e6e, type: 3}
+  - {fileID: 21300000, guid: 406e2155696cceb4d9b043bb7d70e98e, type: 3}
   horns:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 8799768b7698a7144b4e7a4cf4f8a632, type: 3}
+  - {fileID: 21300000, guid: 8754c55a6467d2e4c8f0a9dfa78af834, type: 3}
+  - {fileID: 21300000, guid: 93814305d7d014d41a7cde328c2991e2, type: 3}
   eyes:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 9720793ae67db294990cedae1b294efd, type: 3}
+  - {fileID: 21300000, guid: b43aba16549e8514e843578d9cc22dc3, type: 3}
+  - {fileID: 21300000, guid: 5e104ff48bf8ada48afd8ceb5395bd9b, type: 3}
