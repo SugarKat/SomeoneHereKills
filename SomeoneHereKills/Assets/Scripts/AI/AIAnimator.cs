@@ -38,21 +38,30 @@ public class AIAnimator : MonoBehaviour
     {
         if (agent == null || anim == null) return;
 
-        Vector3 v3 = agent.desiredVelocity;
-        Vector2 dir2D = new Vector2(-v3.z, v3.y);
+        if (anim.GetBool(DEAD))
+        {
+            anim.SetBool("isMoving", false);
+            return;
+        }
 
-        bool hasMoveIntent =
-            agent.hasPath &&
-            !agent.pathPending &&
-            agent.remainingDistance > agent.stoppingDistance + 0.05f;
+        Vector3 vVel = agent.velocity;
+        Vector3 vDes = agent.desiredVelocity;
 
-        bool moving = hasMoveIntent && dir2D.sqrMagnitude > 0.001f;
+        Vector2 vel2 = new Vector2(vVel.x, vVel.z);
+        Vector2 des2 = new Vector2(vDes.x, vDes.z);
 
+        float thr2 = movingThreshold * movingThreshold;
+
+        bool moving =
+            (vel2.sqrMagnitude > thr2) ||
+            (des2.sqrMagnitude > thr2 && agent.hasPath && !agent.pathPending);
+
+        Vector2 dir2D = (vel2.sqrMagnitude > thr2) ? vel2 : des2;
         Vector2 dir = moving ? dir2D.normalized : Vector2.zero;
 
         if (moving)
         {
-            if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+            if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y) * 0.6f)
             {
                 dir.x = Mathf.Sign(dir.x);
                 dir.y = 0f;
@@ -82,9 +91,7 @@ public class AIAnimator : MonoBehaviour
             if (fidgetTimer <= 0f)
             {
                 if (Random.value < fidgetChance)
-                {
                     anim.SetTrigger("DoFidget");
-                }
 
                 fidgetTimer = Random.Range(minFidgetDelay, maxFidgetDelay);
             }
