@@ -11,10 +11,22 @@ public class AIAnimator : MonoBehaviour
     [Header("Tuning")]
     public float movingThreshold = 0.02f;
 
+    [Header("Idle Fidget")]
+    public float minFidgetDelay = 3f;
+    public float maxFidgetDelay = 7f;
+    [Range(0f, 1f)] public float fidgetChance = 0.25f;
+
+    private float fidgetTimer;
+    const string DEAD = "Dead";
+
     void Awake()
     {
         if (!anim) anim = GetComponent<Animator>();
         if (!agent) agent = GetComponent<NavMeshAgent>();
+    }
+    void Start()
+    {
+        fidgetTimer = Random.Range(minFidgetDelay, maxFidgetDelay);
     }
 
     void Update()
@@ -61,6 +73,41 @@ public class AIAnimator : MonoBehaviour
             anim.SetFloat("LastMoveX", dir.x);
             anim.SetFloat("LastMoveY", dir.y);
         }
+
+        //fidget idle
+        if (!moving && !anim.GetBool("Dead"))
+        {
+            fidgetTimer -= Time.deltaTime;
+
+            if (fidgetTimer <= 0f)
+            {
+                if (Random.value < fidgetChance)
+                {
+                    anim.SetTrigger("DoFidget");
+                }
+
+                fidgetTimer = Random.Range(minFidgetDelay, maxFidgetDelay);
+            }
+        }
+        else
+        {
+            fidgetTimer = Random.Range(minFidgetDelay, maxFidgetDelay);
+        }
     }
 
+    public void SetDead(bool dead = true)
+    {
+        if (!anim) return;
+        anim.SetBool(DEAD, dead);
+
+        if (dead)
+        {
+            anim.SetBool("isMoving", false);
+        }
+    }
+
+    public bool IsDead()
+    {
+        return anim && anim.GetBool(DEAD);
+    }
 }
