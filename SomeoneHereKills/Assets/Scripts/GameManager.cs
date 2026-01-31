@@ -49,11 +49,13 @@ public class GameManager : MonoBehaviour
     void GameLost()
     {
         targetKilled = true;
+        GameEndManager.instance.ActivatePanel(false);
         Debug.Log("The killer got the target, mission failed.");
     }
 
     void GameWon()
     {
+        GameEndManager.instance.ActivatePanel(true);
         Debug.Log("We got the killer, target is saved.");
     }
 }
