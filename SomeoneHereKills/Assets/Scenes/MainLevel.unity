@@ -1854,6 +1854,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 440214019}
+  - component: {fileID: 440214020}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -1878,6 +1879,20 @@ Transform:
   - {fileID: 1756273684}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &440214020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440214018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90465d0affb100d4cabbd0c8542cdd3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelAmbience
+  ambienceClip: {fileID: 8300000, guid: 34306f86014576e4fa278433b0835992, type: 3}
+  volume: 0.6
 --- !u!1 &447786006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2145,6 +2160,7 @@ GameObject:
   - component: {fileID: 483333287}
   - component: {fileID: 483333286}
   - component: {fileID: 483333285}
+  - component: {fileID: 483333288}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -2216,6 +2232,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 483333288}
+        m_TargetAssemblyTypeName: PlaySFX, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 341607681}
         m_TargetAssemblyTypeName: GameEndManager, Assembly-CSharp
         m_MethodName: GoToMainMenu
@@ -2266,6 +2294,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483333283}
   m_CullTransparentMesh: 1
+--- !u!114 &483333288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483333283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6787b9d8d4a68494d8b483d72cab3dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySFX
+  clip: {fileID: 8300000, guid: 7abadc90f1ff787459ee2b28bf2428f5, type: 3}
+  volume: 1
+  playOnStart: 0
 --- !u!1 &498154925
 GameObject:
   m_ObjectHideFlags: 0
@@ -4638,6 +4681,7 @@ GameObject:
   - component: {fileID: 920755961}
   - component: {fileID: 920755960}
   - component: {fileID: 920755959}
+  - component: {fileID: 920755962}
   m_Layer: 5
   m_Name: Continue
   m_TagString: Untagged
@@ -4708,7 +4752,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 920755960}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 483333288}
+        m_TargetAssemblyTypeName: PlaySFX, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &920755960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4747,6 +4803,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920755957}
   m_CullTransparentMesh: 1
+--- !u!114 &920755962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920755957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6787b9d8d4a68494d8b483d72cab3dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySFX
+  clip: {fileID: 8300000, guid: 7abadc90f1ff787459ee2b28bf2428f5, type: 3}
+  volume: 1
+  playOnStart: 0
 --- !u!1 &948547851
 GameObject:
   m_ObjectHideFlags: 0
@@ -5637,6 +5708,7 @@ GameObject:
   - component: {fileID: 1170622385}
   - component: {fileID: 1170622384}
   - component: {fileID: 1170622383}
+  - component: {fileID: 1170622386}
   m_Layer: 5
   m_Name: Restart
   m_TagString: Untagged
@@ -5708,6 +5780,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 483333288}
+        m_TargetAssemblyTypeName: PlaySFX, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 341607681}
         m_TargetAssemblyTypeName: GameEndManager, Assembly-CSharp
         m_MethodName: RestartGame
@@ -5758,6 +5842,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170622381}
   m_CullTransparentMesh: 1
+--- !u!114 &1170622386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170622381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6787b9d8d4a68494d8b483d72cab3dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySFX
+  clip: {fileID: 8300000, guid: 7abadc90f1ff787459ee2b28bf2428f5, type: 3}
+  volume: 1
+  playOnStart: 0
 --- !u!1 &1174129361
 GameObject:
   m_ObjectHideFlags: 0
@@ -6009,6 +6108,7 @@ GameObject:
   - component: {fileID: 1224355643}
   - component: {fileID: 1224355645}
   - component: {fileID: 1224355644}
+  - component: {fileID: 1224355646}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -6078,6 +6178,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224355642}
   m_CullTransparentMesh: 1
+--- !u!114 &1224355646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224355642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6787b9d8d4a68494d8b483d72cab3dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySFX
+  clip: {fileID: 8300000, guid: 558ba6bfdee8fc542a407cdf8b4baf84, type: 3}
+  volume: 1
+  playOnStart: 1
 --- !u!1 &1237493736
 GameObject:
   m_ObjectHideFlags: 0
@@ -6847,6 +6962,7 @@ MonoBehaviour:
   agentLayer:
     serializedVersion: 2
     m_Bits: 64
+  gunShot: {fileID: 8300000, guid: e73b4789a31306a4b90cb9adc8e419fb, type: 3}
 --- !u!1 &1436197138
 GameObject:
   m_ObjectHideFlags: 0
@@ -9053,6 +9169,7 @@ GameObject:
   - component: {fileID: 1869682540}
   - component: {fileID: 1869682539}
   - component: {fileID: 1869682538}
+  - component: {fileID: 1869682541}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -9124,6 +9241,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 483333288}
+        m_TargetAssemblyTypeName: PlaySFX, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 341607681}
         m_TargetAssemblyTypeName: GameEndManager, Assembly-CSharp
         m_MethodName: GoToMainMenu
@@ -9174,6 +9303,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869682536}
   m_CullTransparentMesh: 1
+--- !u!114 &1869682541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869682536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6787b9d8d4a68494d8b483d72cab3dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySFX
+  clip: {fileID: 8300000, guid: 7abadc90f1ff787459ee2b28bf2428f5, type: 3}
+  volume: 1
+  playOnStart: 0
 --- !u!1 &1944982240
 GameObject:
   m_ObjectHideFlags: 0

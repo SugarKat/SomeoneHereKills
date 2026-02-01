@@ -5243,6 +5243,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2555738889863253968, guid: 364e085069b9de3459a8375964f83151, type: 3}
+      propertyPath: gameScene
+      value: MainLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555738889863253968, guid: 364e085069b9de3459a8375964f83151, type: 3}
       propertyPath: creditsPanel
       value: 
       objectReference: {fileID: 1507525605}
@@ -5258,6 +5262,10 @@ PrefabInstance:
       propertyPath: mainMenuPanel
       value: 
       objectReference: {fileID: 2028339867}
+    - target: {fileID: 2555738889863253968, guid: 364e085069b9de3459a8375964f83151, type: 3}
+      propertyPath: tutorialScene
+      value: FirstLevel
+      objectReference: {fileID: 0}
     - target: {fileID: 4413101558320422474, guid: 364e085069b9de3459a8375964f83151, type: 3}
       propertyPath: m_Name
       value: MainMenuManager
@@ -7179,7 +7187,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1178758433}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_MethodName: PlayTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

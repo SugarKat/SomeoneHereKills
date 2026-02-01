@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     Camera cam;
 
     public LayerMask agentLayer;
+    [SerializeField]private AudioClip gunShot;
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class InputManager : MonoBehaviour
             BaseAI agent = hit.collider.GetComponentInParent<BaseAI>();
             if (agent != null && agent.IsAgentAlive)
             {
+                AudioManager.Instance.PlaySFXOneShot(gunShot);
                 GameManager.instance.KillEvent(agent);
             }
         }
