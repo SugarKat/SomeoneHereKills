@@ -10,6 +10,7 @@ public class OptionsManager : MonoBehaviour
     public Slider masterSlider;
     public Slider musicSlider;
     public Slider sfxSlider;
+    public Slider ambienceSlider;
     public TMP_Dropdown resolutionDropdown;
     public Toggle fullscreenToggle;
 
@@ -21,12 +22,14 @@ public class OptionsManager : MonoBehaviour
     private float tempMasterVol;
     private float tempMusicVol;
     private float tempSfxVol;
+    private float tempAmbienceVol;
     private int tempResolutionIndex;
     private bool tempFullscreen;
 
     private const string MASTER = "MasterVolume";
     private const string MUSIC = "MusicVolume";
     private const string SFX = "SFXVolume";
+    private const string AMBIENCE = "AmbienceVolume";
     private const string RES = "ResolutionIndex";
     private const string FS = "Fullscreen";
 
@@ -43,6 +46,7 @@ public class OptionsManager : MonoBehaviour
         tempMasterVol = PlayerPrefs.GetFloat(MASTER, 1f);
         tempMusicVol = PlayerPrefs.GetFloat(MUSIC, 1f);
         tempSfxVol = PlayerPrefs.GetFloat(SFX, 1f);
+        tempAmbienceVol = PlayerPrefs.GetFloat(AMBIENCE, 1f);
         tempResolutionIndex = PlayerPrefs.GetInt(RES, 0);
         tempFullscreen = PlayerPrefs.GetInt(FS, 1) == 1;
     }
@@ -54,6 +58,7 @@ public class OptionsManager : MonoBehaviour
         masterSlider.value = tempMasterVol;
         musicSlider.value = tempMusicVol;
         sfxSlider.value = tempSfxVol;
+        ambienceSlider.value = tempAmbienceVol;
     }
 
     void SetupResolutions()
@@ -80,6 +85,7 @@ public class OptionsManager : MonoBehaviour
         tempMasterVol = masterSlider.value;
         tempMusicVol = musicSlider.value;
         tempSfxVol = sfxSlider.value;
+        tempAmbienceVol = ambienceSlider.value;
         tempResolutionIndex = resolutionDropdown.value;
         tempFullscreen = fullscreenToggle.isOn;
 
@@ -91,10 +97,13 @@ public class OptionsManager : MonoBehaviour
 
     void ApplySettings()
     {
-        audioMixer.SetFloat(MASTER, Mathf.Log10(Mathf.Clamp(tempMasterVol, 0.0001f, 1f)) * 20);
-        audioMixer.SetFloat(MUSIC, Mathf.Log10(Mathf.Clamp(tempMusicVol, 0.0001f, 1f)) * 20);
-        audioMixer.SetFloat(SFX, Mathf.Log10(Mathf.Clamp(tempSfxVol, 0.0001f, 1f)) * 20);
+        // Audio (0 = mute, 1 = max)
+        SetVolume01(MASTER, tempMasterVol);
+        SetVolume01(MUSIC, tempMusicVol);
+        SetVolume01(SFX, tempSfxVol);
+        SetVolume01(AMBIENCE, tempAmbienceVol);
 
+        // Fullscreen / Resolution
         Screen.fullScreen = tempFullscreen;
 
         if (tempResolutionIndex >= 0 && tempResolutionIndex < resolutions.Length)
@@ -109,6 +118,7 @@ public class OptionsManager : MonoBehaviour
         PlayerPrefs.SetFloat(MASTER, tempMasterVol);
         PlayerPrefs.SetFloat(MUSIC, tempMusicVol);
         PlayerPrefs.SetFloat(SFX, tempSfxVol);
+        PlayerPrefs.SetFloat(AMBIENCE, tempAmbienceVol);
         PlayerPrefs.SetInt(RES, tempResolutionIndex);
         PlayerPrefs.SetInt(FS, tempFullscreen ? 1 : 0);
         PlayerPrefs.Save();
@@ -119,4 +129,23 @@ public class OptionsManager : MonoBehaviour
         RefreshUI();
         Debug.Log("Changes Reverted");
     }
+
+    const float MIN_DB = -80f;
+    const float MAX_DB = 0f;
+
+    void SetVolume01(string param, float v01)
+    {
+        if (audioMixer == null) return;
+
+        if (v01 <= 0.0001f)
+        {
+            audioMixer.SetFloat(param, MIN_DB);
+            return;
+        }
+
+        float db = Mathf.Log10(v01) * 20f;
+        db = Mathf.Clamp(db, MIN_DB, MAX_DB);
+        audioMixer.SetFloat(param, db);
+    }
+
 }
